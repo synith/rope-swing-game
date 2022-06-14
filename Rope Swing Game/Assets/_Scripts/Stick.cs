@@ -39,6 +39,12 @@ public class Stick : MonoBehaviour
     {
         Vector3 center = (node1.transform.position + node2.transform.position) / 2;
 
+        if ((node2.transform.position - node1.transform.position).magnitude > 5f)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (!node1.isFixed)
         {
             Vector3 node1DirTowardCenter = (node1.transform.position - center).normalized;
