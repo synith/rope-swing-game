@@ -123,6 +123,27 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &501913739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1754970947870722974, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
+  m_PrefabInstance: {fileID: 903212734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &501913746
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501913739}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &542508511
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,9 +557,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1754970947870722974, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3243087916821543303, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642612857885602014, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5497564973566075462, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
       propertyPath: m_Name
       value: pf_Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497564973566075462, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5497564973566075463, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
       propertyPath: m_RootOrder
@@ -584,7 +621,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4642612857885602014, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 66d64510766ce504da7ca3d13c3b38e8, type: 3}
 --- !u!1 &1028513131
 GameObject:
@@ -831,6 +869,14 @@ PrefabInstance:
     - target: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_Name
       value: PlayerArmature
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885216827943657505, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: canPush
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885216827943657505, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: pushLayers.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
