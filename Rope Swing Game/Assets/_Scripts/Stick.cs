@@ -23,11 +23,8 @@ public class Stick : MonoBehaviour
     }
     private void Start()
     {
-        if (node1 != null || node2 != null)
-        {
-            length = Vector3.Distance(node1.transform.position, node2.transform.position);
-            UpdateLineRenderer();
-        }
+        length = Vector3.Distance(node1.transform.position, node2.transform.position);
+        UpdateLineRenderer();
     }
     private void UpdateLineRenderer()
     {

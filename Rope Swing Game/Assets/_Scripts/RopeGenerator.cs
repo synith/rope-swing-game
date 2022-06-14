@@ -10,9 +10,9 @@ public class RopeGenerator : MonoBehaviour
     private Node nodeTemplate;
     private Stick stickTemplate;
 
-    private int heightInNodes = 4;
-    private int widthInNodes = 3;
-    private float distanceBetweenNodes = 2f;
+    [SerializeField] private int heightInNodes = 4;
+    [SerializeField] private int widthInNodes = 3;
+    [SerializeField] private float distanceBetweenNodes = 2f;
 
     private void Awake()
     {
@@ -25,35 +25,73 @@ public class RopeGenerator : MonoBehaviour
         nodes = new List<Node>();
         sticks = new List<Stick>();
 
-        Node previousNode = null;
+
+        Node previousNodeX = null;
+        Node previousNodeY = null;
 
         for (int y = 0; y < heightInNodes; y++)
         {
+            
+
             for (int x = 0; x < widthInNodes; x++)
             {
-                Vector3 pos = new Vector3(x * distanceBetweenNodes, y * distanceBetweenNodes, 0);
+                Vector3 pos = new Vector3(x * distanceBetweenNodes, -y * distanceBetweenNodes, 0);
 
-                Node node = Instantiate(nodeTemplate);
+                Node node = Instantiate(nodeTemplate, pos, Quaternion.identity);
                 node.gameObject.SetActive(true);
-                node.transform.position = pos;
 
-                node.isFixed = true;
+                if (y == 0 && x == 0)
+                {
+                    node.isFixed = true;
+                }
+                else
+                    node.isFixed = false;
+                
                 nodes.Add(node);
 
-                if (previousNode != null)
+                if (x == 0)
                 {
-                    node.isFixed = false;
+                    previousNodeX = null;
+                }
+
+                if (previousNodeX != null)
+                {
                     Stick stick = Instantiate(stickTemplate);
                     stick.gameObject.SetActive(true);
-                    stick.Init(previousNode, node);
+                    stick.Init(previousNodeX, node);
 
                     sticks.Add(stick);
                 }
-                previousNode = node;
+                previousNodeX = node;
+            }
+        }
+
+        for (int x = 0; x < heightInNodes; x++)
+        {
+            
+            for (int y = 0; y < widthInNodes; y++)
+            {
+                int nodeIndex = heightInNodes*y + x;
+                Debug.Log(nodeIndex);
+                Node node = nodes[nodeIndex];
+
+                if (y == 0)
+                {
+                    previousNodeY = null;
+                }
+
+                if (previousNodeY != null)
+                {
+                    Stick stick = Instantiate(stickTemplate);
+                    stick.gameObject.SetActive(true);
+                    stick.Init(previousNodeY, node);
+                    sticks.Add(stick);
+                }
+                previousNodeY = node;
+
             }
         }
     }
-
     private void FixedUpdate()
     {
         foreach (Node node in nodes)
