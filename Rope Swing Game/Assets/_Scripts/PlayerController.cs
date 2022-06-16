@@ -4,49 +4,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
-    //private Rigidbody rb;
-    //private float speed = 5f;
-
-    //private Transform cameraRootTransform;
-    //private void Awake()
-    //{
-    //    rb = GetComponent<Rigidbody>();
-    //    cameraRootTransform = transform.Find("cameraRoot");
-    //}
-    //private void Update()
-    //{
-    //    Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-    //    moveDirection = moveDirection.normalized;
-    //    rb.AddForce(moveDirection * speed * rb.mass);
-
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        rb.AddForce(Vector3.up * speed * rb.mass * 50f, ForceMode.Impulse);
-    //    }
-
-
-    //    Vector3 angles = cameraRootTransform.localEulerAngles;
-    //    angles.z = 0;
-
-    //    float angle = cameraRootTransform.localEulerAngles.x;
-
-    //    if (angle > 180 && angle < 340)
-    //    {
-    //        angles.x = 340;
-    //    }
-    //    else if (angle < 180 && angle > 40)
-    //    {
-    //        angles.x = 40;
-    //    }
-
-    //    cameraRootTransform.localEulerAngles = angles;
-    //}
     [SerializeField]
     private float playerSpeed = 2.0f;
     [SerializeField]
     private float jumpHeight = 1.0f;
     [SerializeField]
     private float gravityValue = -9.81f;
+    [SerializeField]
+    private float rotationSpeed = 2f;
 
     private Transform cameraTransform;
     private CharacterController controller;
@@ -81,11 +46,15 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+
+
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
 
+        // Moves player relative to camera direction
         move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
         move.y = 0f;
+
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         // Changes the height position of the player..
@@ -96,5 +65,10 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        // Rotate towards camera direction
+        float targetAngle = cameraTransform.eulerAngles.y;
+        Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }
