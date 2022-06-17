@@ -11,6 +11,10 @@ public class CameraSwitch : MonoBehaviour
     private PlayerInput playerInput;
     [SerializeField]
     private int priorityBoostAmount = 10;
+    [SerializeField]
+    private Canvas thirdPersonCanvas;
+    [SerializeField]
+    private Canvas aimCanvas;
 
     private CinemachineVirtualCamera virtualCamera;
 
@@ -21,6 +25,7 @@ public class CameraSwitch : MonoBehaviour
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
         aimAction = playerInput.actions["Aim"];
+        aimCanvas.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -32,11 +37,16 @@ public class CameraSwitch : MonoBehaviour
     private void CancelAim()
     {
         virtualCamera.Priority -= priorityBoostAmount;
+        aimCanvas.gameObject.SetActive(false);
+        thirdPersonCanvas.gameObject.SetActive(true);
     }
 
     private void StartAim()
     {
         virtualCamera.Priority += priorityBoostAmount;
+        thirdPersonCanvas.gameObject.SetActive(false);
+        aimCanvas.gameObject.SetActive(true);
+        
     }
 
     private void OnDisable()
