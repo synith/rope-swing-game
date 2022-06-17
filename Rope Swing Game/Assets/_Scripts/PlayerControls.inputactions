@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aiming",
+                    "name": "Aim",
                     "type": "Button",
                     "id": "551bb137-9524-4e68-a82e-bf6e05f220c9",
                     "expectedControlType": "Button",
@@ -147,7 +147,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aiming",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float gravityValue = -9.81f;
     [SerializeField]
-    private float rotationSpeed = 2f;
+    private float rotationSpeed = 5f;
 
     private Transform cameraTransform;
     private CharacterController controller;
